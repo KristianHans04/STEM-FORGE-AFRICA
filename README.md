@@ -8,36 +8,32 @@ STEM FORGE AFRICA LTD provides platforms, resources, and opportunities for young
 
 ## Features
 
-- Modern, responsive design with dark mode support
-- Secure contact form with email integration
-- Mobile-optimized for all devices
-- SEO-friendly architecture
-- Accessibility compliant (WCAG 2.1 Level AA)
-- Production-ready deployment configuration
+- ✅ Modern, responsive design with dark/light mode
+- ✅ Secure contact form with Zoho SMTP integration
+- ✅ Mobile-first responsive design
+- ✅ SEO-optimized with OpenGraph tags
+- ✅ WCAG 2.1 Level AA accessibility
+- ✅ Production-ready for Northflank deployment
+- ✅ Type-safe with TypeScript
+- ✅ Kenyan flag color palette
 
 ## Technology Stack
 
-### Backend
-- Django 5.2.8
-- PostgreSQL (production) / SQLite (development)
-- Gunicorn WSGI server
-- WhiteNoise static file serving
-
-### Frontend
-- Tailwind CSS v4
-- Google Fonts (Inter & Poppins)
-- Vanilla JavaScript
-
-### Development
-- pytest for testing
-- Black for code formatting
-- Flake8 for linting
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Database**: PostgreSQL + Prisma ORM
+- **Email**: Nodemailer (Zoho SMTP)
+- **Deployment**: Northflank
+- **Theme**: next-themes for dark/light mode
+- **Icons**: Lucide React
 
 ## Quick Start
 
 ### Prerequisites
-- Python 3.12 or higher
-- Node.js 22 or higher
+- Node.js 18.17 or higher
+- PostgreSQL
+- npm or yarn
 - Git
 
 ### Installation
@@ -47,164 +43,156 @@ STEM FORGE AFRICA LTD provides platforms, resources, and opportunities for young
 git clone https://github.com/KristianHans04/STEM-FORGE-AFRICA.git
 cd STEM-FORGE-AFRICA
 
-# Create and activate virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install Python dependencies
-pip install -r requirements.txt
-
-# Install Node.js dependencies
+# Install dependencies
 npm install
 
 # Configure environment variables
 cp .env.example .env
-# Edit .env with your settings (email credentials, etc.)
+# Edit .env with your database and SMTP credentials
 
-# Build CSS (IMPORTANT: Run this before starting server)
-npm run build:css
-
-# Run database migrations
-python manage.py migrate
+# Setup database
+npm run db:generate
+npm run db:push
 
 # Start development server
-python manage.py runserver
+npm run dev
 ```
 
-Visit http://127.0.0.1:8000 to see the website.
+Visit http://localhost:3000 to see the website.
 
-**Important:** Always run `npm run build:css` before starting the server, or styling won't load!
-
-### Using the Startup Script (Recommended)
-
-For convenience, use the provided startup script:
+## Development
 
 ```bash
-# Make sure you're in the project directory
-./start.sh
+# Development server
+npm run dev
+
+# Type checking
+npm run type-check
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-This script automatically:
-1. Activates the virtual environment
-2. Builds the CSS
-3. Starts the Django server
-
-### Development Workflow
-
-For active development, run these in separate terminals:
+## Database Management
 
 ```bash
-# Terminal 1: Django development server
-source venv/bin/activate
-python manage.py runserver
+# Generate Prisma client
+npm run db:generate
 
-# Terminal 2: Tailwind CSS watch mode (auto-rebuild on changes)
-npm run dev:css
+# Push schema changes (development)
+npm run db:push
+
+# Create migration (production)
+npm run db:migrate
+
+# Open Prisma Studio GUI
+npm run db:studio
 ```
 
 ## Testing
 
 ```bash
-# Run all tests
-pytest
+# Run tests
+npm run test
 
-# Run with coverage report
-pytest --cov=. --cov-report=html
+# Watch mode
+npm run test:watch
 
-# View coverage report
-open htmlcov/index.html  # Or your browser of choice
-```
-
-Current test coverage: 85%
-
-## Code Quality
-
-```bash
-# Format code with Black
-black .
-
-# Check code style with Flake8
-flake8
-
-# Security audit
-pip-audit
+# Coverage report
+npm run test:coverage
 ```
 
 ## Project Structure
 
 ```
 STEM-FORGE-AFRICA/
-├── core/              # Django project settings
-├── pages/             # Main application
-├── templates/         # HTML templates
-├── static/            # Static files (CSS, JS, images)
+├── app/                 # Next.js App Router
+│   ├── api/            # API routes
+│   ├── components/     # React components
+│   ├── lib/           # Utilities
+│   ├── about/         # About page
+│   ├── programs/      # Programs page
+│   ├── contact/       # Contact page
+│   ├── globals.css    # Global styles
+│   ├── layout.tsx     # Root layout
+│   └── page.tsx       # Home page
+├── prisma/            # Database schema
+├── public/            # Static assets
+├── types/             # TypeScript declarations
 ├── docs/              # Documentation
-├── requirements.txt   # Python dependencies
-└── package.json       # Node.js dependencies
+└── package.json       # Dependencies
 ```
 
 ## Documentation
 
-Comprehensive guides available in the `docs/` directory:
+Comprehensive guides in the `docs/` directory:
 
-- **SETUP.md** - Detailed installation and configuration
-- **DEPLOYMENT.md** - Production deployment on Northflank
-- **PROJECT_ARCHITECTURE.md** - Technical architecture and design decisions
-- **CONTRIBUTING.md** - Guidelines for contributing to the project
+- **NEXTJS_SETUP.md** - Complete setup guide
+- **NEXTJS_ARCHITECTURE.md** - Technical architecture
 
 ## Configuration
 
 ### Environment Variables
 
-Key environment variables in `.env`:
+Required environment variables in `.env`:
 
 ```env
-SECRET_KEY=<your-secret-key>
-DEBUG=True  # Set to False in production
-DATABASE_URL=<your-database-url>
-EMAIL_HOST_USER=<your-email>
-EMAIL_HOST_PASSWORD=<your-password>
+# Database
+DATABASE_URL="postgresql://user:password@localhost:5432/stemforgeafrica"
+
+# Zoho SMTP
+SMTP_HOST="smtp.zoho.com"
+SMTP_PORT="465"
+SMTP_USER="your-email@stemforgeafrica.org"
+SMTP_PASSWORD="your-smtp-password"
+SMTP_FROM_EMAIL="your-email@stemforgeafrica.org"
+SMTP_FROM_NAME="STEM FORGE AFRICA"
+
+# Application
+NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+NODE_ENV="development"
 ```
 
-See `.env.example` for all available options.
+See `.env.example` for complete configuration options.
 
-### Email Setup
+## Deployment to Northflank
 
-The contact form requires email configuration. Update these in `.env`:
-
-```env
-EMAIL_HOST=smtp.zoho.com
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER=your-email@domain.com
-EMAIL_HOST_PASSWORD=your-app-password
+**Build Command:**
+```bash
+npm install && npm run db:generate && npm run build
 ```
 
-## Deployment
+**Start Command:**
+```bash
+npm start
+```
 
-This project is configured for production deployment on Northflank. See `docs/DEPLOYMENT.md` for step-by-step instructions.
-
-Key deployment files:
-- `Procfile` - Gunicorn configuration
-- `requirements.txt` - Python dependencies
-- Static files served via WhiteNoise
+**Environment Variables:**
+- Add all variables from `.env`
+- Set `NODE_ENV=production`
+- Use Northflank PostgreSQL addon for `DATABASE_URL`
 
 ## Security
 
-This project implements industry-standard security practices:
-- CSRF protection on all forms
-- XSS prevention via template escaping
-- SQL injection protection via Django ORM
-- Secure session cookies
-- Environment-based secrets management
+Industry-standard security practices implemented:
+- ✅ Secure HTTP headers (CSP, HSTS, X-Frame-Options)
+- ✅ XSS protection via React and input validation
+- ✅ SQL injection prevention via Prisma ORM
+- ✅ Input validation with Zod schemas
+- ✅ CSRF protection (Next.js built-in)
+- ✅ Environment-based secrets management
+- ✅ Rate limiting ready (TODO)
 
 ## Contributing
 
-Contributions are welcome! Please read `docs/CONTRIBUTING.md` for guidelines on:
-- Code style and formatting
-- Testing requirements
-- Security considerations
-- Pull request process
+Contributions welcome! Please ensure:
+- TypeScript compilation passes (`npm run type-check`)
+- Production build succeeds (`npm run build`)
+- Code follows project structure and conventions
+- Security guidelines followed
 
 ## License
 
@@ -212,50 +200,55 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Troubleshooting
 
-### Styling Not Loading / Website Looks Plain
-
-**Problem:** The website appears unstyled (black text on white background, no colors).
-
-**Solution:** You need to build the CSS before starting the server:
+### Port Already in Use
 
 ```bash
-npm run build:css
+# Kill process on port 3000
+lsof -ti:3000 | xargs kill -9
 ```
 
-Then start the server:
+### TypeScript Errors
 
 ```bash
-python manage.py runserver
+# Run type check
+npm run type-check
+
+# Clear cache
+rm -rf .next
+npm run dev
 ```
 
-**Why:** Tailwind CSS is a build-time tool. The `static/css/output.css` file must be generated from `static/css/input.css` before Django can serve it.
-
-### Dark Mode Not Working
-
-Make sure JavaScript is enabled in your browser. The dark mode toggle uses localStorage and requires JavaScript.
-
-### Module Not Found Errors
-
-Ensure your virtual environment is activated:
+### Database Issues
 
 ```bash
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
+# Regenerate Prisma client
+npm run db:generate
+
+# Reset database (warning: deletes data)
+npm run db:push -- --force-reset
 ```
 
-Then reinstall dependencies:
+### Build Errors
 
 ```bash
-pip install -r requirements.txt
+# Clear everything
+rm -rf .next node_modules
+npm install
+npm run build
 ```
 
 ## Support
 
-For questions, issues, or support:
-- Email: info@stemforgeafrica.org
-- Documentation: See `docs/` directory
-- Issues: GitHub Issues
+For questions or support:
+- **Email**: info@stemforgeafrica.org
+- **Documentation**: `docs/` directory
+- **Issues**: GitHub Issues
+- **Website**: https://stemforgeafrica.org
 
-## Acknowledgments
+## Related Projects
 
-Built with Django, Tailwind CSS, and modern web development best practices to create a professional, accessible, and performant website for STEM education in Africa.
+- **FIRST Global Team Kenya**: https://fgckenya.com
+
+## License
+
+MIT License - See LICENSE file for details
