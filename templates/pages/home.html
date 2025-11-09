@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - STEM FORGE AFRICA LTD{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-800 dark:to-primary-900 text-white py-20">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Empowering Innovation Through STEM</h1>
+            <p class="text-xl md:text-2xl mb-8">Building Africa's future through Science, Technology, Engineering, and Mathematics education.</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="{% url 'pages:programs' %}" class="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition text-center">Our Programs</a>
+                <a href="{% url 'pages:contact' %}" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition text-center">Get Involved</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+        <div class="text-center max-w-3xl mx-auto">
+            <h2 class="text-4xl font-bold mb-6 text-gray-900 dark:text-white">Our Mission</h2>
+            <p class="text-lg text-gray-700 dark:text-gray-300">
+                STEM FORGE AFRICA LTD is dedicated to fostering innovation and excellence in STEM education across Africa. 
+                We provide platforms, resources, and opportunities for young people to develop their skills and compete on a global stage.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Impact Stats -->
+<section class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div>
+                <h3 class="text-5xl font-bold text-primary-600 dark:text-primary-400 mb-2">500+</h3>
+                <p class="text-xl text-gray-700 dark:text-gray-300">Students Reached</p>
+            </div>
+            <div>
+                <h3 class="text-5xl font-bold text-primary-600 dark:text-primary-400 mb-2">10+</h3>
+                <p class="text-xl text-gray-700 dark:text-gray-300">Competitions</p>
+            </div>
+            <div>
+                <h3 class="text-5xl font-bold text-primary-600 dark:text-primary-400 mb-2">5+</h3>
+                <p class="text-xl text-gray-700 dark:text-gray-300">Active Programs</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-16 bg-primary-600 dark:bg-primary-800 text-white">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold mb-6">Ready to Make an Impact?</h2>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">Join us in empowering the next generation of African innovators and leaders.</p>
+        <a href="{% url 'pages:contact' %}" class="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition inline-block">Contact Us Today</a>
+    </div>
+</section>
+{% endblock %}
