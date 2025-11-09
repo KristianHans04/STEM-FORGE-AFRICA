@@ -71,7 +71,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-Visit http://127.0.0.1:8000 to see the website.
+Visit http://127.0.0.1:8000 to see the website.(On your local, Lol!)
 
 **Important:** Always run `npm run build:css` before starting the server, or styling won't load!
 
