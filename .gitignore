@@ -71,3 +71,4 @@ temp_docs/
 *.pem
 *.key
 *.crt
+COMMANDS.md

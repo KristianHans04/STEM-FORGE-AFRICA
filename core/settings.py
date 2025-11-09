@@ -109,12 +109,18 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # WhiteNoise configuration for static files
+import sys
+TESTING = 'pytest' in sys.modules or 'test' in sys.argv
+
+# Use simpler storage backend in development to avoid issues with Tailwind source files
+# In production, use WhiteNoise's compressed manifest storage
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage" if (TESTING or DEBUG)
+        else "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 
