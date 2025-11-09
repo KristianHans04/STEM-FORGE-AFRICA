@@ -2,93 +2,95 @@
 
 MANDATORY security measures for every feature:
 
-SQL Injection Prevention: Use parameterized queries (Django ORM handles this, but be explicit).
+SQL Injection Prevention: Use parameterized queries (Prisma ORM provides this protection).
 
-XSS Protection: Sanitize all user input and escape all output (use Django templates' auto-escaping).
+XSS Protection: Sanitize all user input and escape all output (React handles auto-escaping, Zod validates inputs).
 
-CSRF Protection: Implement anti-CSRF tokens in all forms ({% csrf_token %}).
+CSRF Protection: Implement anti-CSRF tokens in all forms (Next.js provides built-in protection).
 
-Rate Limiting: Show how to enforce limits on login and API access.
+Rate Limiting: Implement limits on API endpoints and form submissions.
 
 DDoS Protection: Recommend middleware or settings for request throttling.
 
-Input Validation: Use Django Forms or Serializers for whitelisting and format enforcement.
+Input Validation: Use Zod schemas for whitelisting and format enforcement on all inputs.
 
-Authentication: Use Django's built-in, secure auth system.
+Authentication: Use secure, industry-standard auth systems (NextAuth, JWT, etc.).
 
-Authorization: Always check user permissions (@permission_required, etc.).
+Authorization: Always check user permissions before granting access to resources.
 
 File Upload Security: Validate file types, scan for malware, and restrict sizes.
 
-Dependency Security: Use tools like pip-audit or safety.
+Dependency Security: Use npm audit and keep dependencies updated.
 
-Content Security Policy (CSP): Show how to apply strict CSP headers.
+Content Security Policy (CSP): Apply strict CSP headers via next.config.ts.
 
-Secure Headers: Implement all standard HTTP security headers (django-secure or middleware).
+Secure Headers: Implement all standard HTTP security headers (HSTS, X-Frame-Options, etc.).
 
-API Security: If we build an API, use token-based authentication (e..g., DRF's JWT).
+API Security: Use token-based authentication with proper validation.
 
-Password Security: Use Django's default password hashers.
+Password Security: Use bcrypt or similar for password hashing.
 
-Sensitive Data Logging: Exclude sensitive fields from logs.
+Sensitive Data Logging: Exclude sensitive fields from logs and error messages.
 
-Session Security: Set cookies with SECURE_COOKIE, HTTPONLY_COOKIE, and SESSION_COOKIE_SAMESITE.
+Session Security: Set cookies with secure, httpOnly, and sameSite attributes.
 
 Directory Traversal Protection: Sanitize and validate file paths.
 
-Mass Assignment Protection: Use explicit fields in forms/serializers.
+Mass Assignment Protection: Use explicit field validation in API routes.
 
-Information Disclosure Prevention: Set DEBUG = False in production.
+Information Disclosure Prevention: Never expose internal errors or stack traces in production.
 
-Clickjacking Protection: Use X-Frame-Options middleware.
+Clickjacking Protection: Use X-Frame-Options: DENY header.
 
 2. API Keys & Secrets Management
 
 NEVER commit API keys or secrets.
 
-Use environment variables (e.g., via python-decouple or django-environ) loaded from a .env file.
+Use environment variables loaded from a .env file.
 
 The .env file must be in .gitignore.
 
 3. Database Protection – NEVER DESTROY DATA
 
-NEVER suggest destructive commands (dropdb, reset_db, flush).
+NEVER suggest destructive commands (dropdb, reset, flush).
 
-ONLY use safe Django migrations (makemigrations, migrate).
+ONLY use safe Prisma migrations (prisma migrate dev, prisma db push).
 
 ALWAYS recommend backing up before migrations.
 
-If data needs cleanup, recommend soft deletes (is_active = False) or archiving.
+If data needs cleanup, recommend soft deletes (isActive = false) or archiving.
 
 4. Testing & CI/CD Requirements – MANDATORY
 
-MUST write tests for all code using pytest-django.
+MUST write tests for all code using Jest and React Testing Library.
 
-Unit tests for models and services.
+Unit tests for components, utilities, and API routes.
 
-Integration tests for APIs and views.
+Integration tests for user flows and API endpoints.
 
 Test Coverage: Aim for 80%+ coverage.
 
-CI/CD Pipeline MUST PASS: All code must pass linting (e.g., black, flake8) and all tests.
+CI/CD Pipeline MUST PASS: All code must pass TypeScript checks and tests.
 
 5. Data Structures & Algorithms (DSA) Best Practices
 
 Prioritize Efficiency: Always consider time/space complexity (Big O).
 
-Data Structure Selection: Use appropriate Python data structures (dict for O(1) lookups, set for uniqueness, etc.).
+Data Structure Selection: Use appropriate data structures (Map for O(1) lookups, Set for uniqueness, etc.).
 
-Algorithm Optimization: Avoid O(n^2) loops in database queries (fix N+1 problems with select_related and prefetch_related).
+Algorithm Optimization: Avoid O(n^2) loops in database queries (use Prisma's include and select for efficient queries).
 
 6. Code Organization & Modern Practices
 
-Django Project Structure: Follow a clean, scalable structure.
+Next.js Project Structure: Follow the App Router conventions with proper file organization.
 
 CSS/Styling: Use Tailwind v4. No inline styles.
 
-HTML/Templates: Use reusable Django template partials/includes. No business logic in templates.
+Components: Create reusable React components. Keep components focused and single-purpose.
 
 Services/Modules: Follow the Single Responsibility Principle.
+
+TypeScript: Use proper typing for all functions, components, and API routes.
 
 7. Documentation Best Practices
 
@@ -104,7 +106,7 @@ This is a global website, not region-specific.
 
 DO NOT use region-specific references.
 
-MUST support internationalization (i18n) and localization (l10n) from the start (use Django's built-in features).
+MUST support internationalization (i18n) and localization (l10n) from the start (use next-intl or similar).
 
 Support USD as the primary currency for any donation/sponsorship features.
 
@@ -136,17 +138,17 @@ Implement this using Tailwind's dark: variant, toggled by a class on the <html> 
 
 12. SEO Optimization (Target: 95%+ Lighthouse Score)
 
-Meta Tags: Unique <title> and <description> for every page (use Django template blocks).
+Meta Tags: Unique <title> and <description> for every page (use Next.js Metadata API).
 
-Semantic HTML: Use it correctly.
+Semantic HTML: Use correct HTML5 semantic elements.
 
-Performance: Lazy load images, use modern formats (WebP), etc.
+Performance: Use Next/Image for optimization, lazy load content, use modern formats (WebP, AVIF).
 
-Core Web Vitals: Keep them in mind.
+Core Web Vitals: Optimize for LCP, FID, and CLS metrics.
 
-URLs: Use clean, descriptive slugs (e.g., slugify).
+URLs: Use clean, descriptive slugs in routing.
 
-Sitemap: Show how to use Django's sitemap framework.
+Sitemap: Generate sitemap.xml using next-sitemap or similar tools.
 
 13. No Emojis Policy
 
