@@ -35,7 +35,7 @@ pycodestyle==2.14.0
 pyflakes==3.4.0
 Pygments==2.19.2
 pyparsing==3.2.5
-pytest==9.0.0
+pytest==9.0.3
 pytest-cov==7.0.0
 pytest-django==4.11.1
 python-decouple==3.8
