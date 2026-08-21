@@ -33,7 +33,7 @@ psycopg2-binary==2.9.11
 py-serializable==2.1.0
 pycodestyle==2.14.0
 pyflakes==3.4.0
-Pygments==2.19.2
+Pygments==2.20.0
 pyparsing==3.2.5
 pytest==9.0.3
 pytest-cov==7.0.0
