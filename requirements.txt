@@ -40,7 +40,7 @@ pytest-cov==7.0.0
 pytest-django==4.11.1
 python-decouple==3.8
 pytokens==0.3.0
-requests==2.32.5
+requests==2.33.0
 rich==14.2.0
 sortedcontainers==2.4.0
 sqlparse==0.6.0
